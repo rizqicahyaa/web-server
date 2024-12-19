@@ -9,9 +9,9 @@ RUN npm install
 COPY . .
 
 ENV APP_ENV=production
-ENV APP_PORT=8080
-ENV MODEL_URL="[MODEL URL]"
-ENV PROJECT_ID="[PROJECT ID]"
+ENV APP_PORT=3000
+ENV MODEL_URL="MODEL_URL= https://storage.googleapis.com/modelml_submission/model.json"
+ENV PROJECT_ID="submissionmlgc-rizqicahyaa"
 
 CMD [ "npm", "start" ]
 
