@@ -4,19 +4,15 @@ FROM node:16
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-ENV HOST 0.0.0.0
+RUN npm install
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install --only=prod
-
-# Copy the rest of the application code
 COPY . .
 
-# Expose the port the app runs on
-EXPOSE 3000
+ENV APP_ENV=production
+ENV APP_PORT=8080
+ENV MODEL_URL="[MODEL URL]"
+ENV PROJECT_ID="[PROJECT ID]"
 
-# Command to run the application
-CMD ["npm", "start"]
+CMD [ "npm", "start" ]
+
+EXPOSE 3000
