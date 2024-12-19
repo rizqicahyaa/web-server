@@ -1,18 +1,22 @@
 # Use the official Node.js 14 image
-FROM node:16
+FROM node:18
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
-RUN npm install
+ENV HOST 0.0.0.0
 
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --only=prod
+
+# Copy the rest of the application code
 COPY . .
 
-ENV APP_ENV=production
-ENV APP_PORT=3000
-ENV MODEL_URL="MODEL_URL= https://storage.googleapis.com/modelml_submission/model.json"
-ENV PROJECT_ID="submissionmlgc-rizqicahyaa"
-
-CMD [ "npm", "start" ]
-
+# Expose the port the app runs on
 EXPOSE 3000
+
+# Command to run the application
+CMD ["npm", "start"]
